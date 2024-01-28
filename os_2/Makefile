@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall
 
 pifagor3: pifagor3.c
 	$(CC) $(CFLAGS) -o pifagor3 pifagor3.c -lm
