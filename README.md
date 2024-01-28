@@ -58,7 +58,9 @@
 <br />
 דוגמת הרצה:
 <br />
-![image](https://github.com/ron12120/OS1/assets/117669404/f7ee71bb-a424-47e6-bb28-bb473264836a)
+
+![image](https://github.com/ron12120/OS1/assets/117669404/868e21cf-d367-4c9e-a698-8aaf8dd22002)
+
 
 <br />
 
