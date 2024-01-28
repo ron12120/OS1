@@ -19,6 +19,9 @@
 
 ![image](https://github.com/ron12120/OS1/assets/76705730/199f06fc-ea4c-4150-b177-53d9e6f976f0)
 <br />
+הרצה של התוכנית בעזרת דיבאגר גרפי ddd:
+<br />
+
 ![image](https://github.com/ron12120/OS1/assets/117669404/972ad3be-afb8-409d-be33-cfc0406238ec)
 <br /><br />
 **באג3:**
@@ -40,6 +43,9 @@
 <br />
 
 ![image](https://github.com/ron12120/OS1/assets/76705730/d52815da-b7f6-4f4e-95ac-2a0f71365d6e)
+<br />
+
+הרצה של התוכנית בעזרת דיבאגר גרפי ddd:
 <br />
 ![image](https://github.com/ron12120/OS1/assets/117669404/e3b7d290-8d3a-4b5e-8c85-aa81e32d4fe9)
 <br />
