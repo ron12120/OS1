@@ -153,7 +153,7 @@ void *createCodec(char key[KEY_LEN])
 	return cod;
 }
 
-void freecoded(void *codec)
+void freecodec(void *codec)
 {
 	free(codec);
 	codec = NULL;
