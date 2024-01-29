@@ -75,6 +75,36 @@
  דוגמת הרצה של encode וdecode
  <br />
  ![image](https://github.com/ron12120/OS1/assets/117669404/4b0003cf-24d6-4239-9131-aaf943069614)
+
+  <br /> <br />
+
+
+ ![image](https://github.com/ron12120/OS1/assets/117669404/16247cdb-c5d9-4f36-b04c-19f30c640c38)
+ <br /> <br />
+
+ ![image](https://github.com/ron12120/OS1/assets/117669404/aaa95430-5bbd-41d3-9a23-9d61495fac9e)
+
+  <br /> <br />
+
+![image](https://github.com/ron12120/OS1/assets/117669404/d60a6aaf-966a-49a4-91e8-22526591c242)
+
+
+  <br /> <br />
+
+ ![image](https://github.com/ron12120/OS1/assets/117669404/a7c7f87a-3019-4ea8-8032-1a5e9f4d0afe)
+
+
+ <br /> <br />
+
+![image](https://github.com/ron12120/OS1/assets/117669404/8c97fe6a-ac40-4509-8db2-ee61dbcd5c8d)
+
+ <br /> <br />
+    
+
+
+
+  
+ 
  
 
 
