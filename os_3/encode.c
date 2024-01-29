@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 		exit(errno);
 	}
 
-	void (*freecodec)() = (void (*)())dlsym(handle, "freecoded");
+	void (*freecodec)() = (void (*)())dlsym(handle, "freecodec");
 	if (freecodec == NULL)
 	{
 		dlclose(handle);
