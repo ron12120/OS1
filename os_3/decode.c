@@ -2,99 +2,103 @@
 
 int main(int argc, char **argv)
 {
-	if (argc != 4)
-	{
-		fprintf(stderr, "Usage: $ ./decode <key> <src> <dst>");
-		exit(EXIT_FAILURE);
-	}
+    if (argc != 4)
+    {
+        fprintf(stderr, "Usage: $ ./decode <key> <src> <dst>");
+        exit(EXIT_FAILURE);
+    }
 
-	void *handle = NULL;
-	handle = dlopen(CODEC_NAME, RTLD_LAZY);
-	if (handle == NULL)
-	{
-		perror("dlopen(3) failed");
-		exit(errno);
-	}
+    void *handle = NULL;
+    handle = dlopen(CODEC_NAME, RTLD_LAZY);
+    if (handle == NULL)
+    {
+        perror("dlopen(3) failed");
+        exit(errno);
+    }
 
-	pcodec (*createCodec)() = (pcodec(*)())dlsym(handle, "createCodec");
-	if (createCodec == NULL)
-	{
-		dlclose(handle);
-		handle = NULL;
+    pcodec (*createCodec)() = (pcodec(*)())dlsym(handle, "createCodec");
+    if (createCodec == NULL)
+    {
+        dlclose(handle);
+        handle = NULL;
 
-		perror("dlsym(3) failed");
-		exit(errno);
-	}
+        perror("dlsym(3) failed");
+        exit(errno);
+    }
 
-	void (*freecodec)() = (void (*)())dlsym(handle, "freecodec");
-	if (freecodec == NULL)
-	{
-		dlclose(handle);
-		handle = NULL;
+    void (*freecodec)() = (void (*)())dlsym(handle, "freecodec");
+    if (freecodec == NULL)
+    {
+        dlclose(handle);
+        handle = NULL;
 
-		perror("dlsym(3) failed");
-		exit(errno);
-	}
+        perror("dlsym(3) failed");
+        exit(errno);
+    }
 
-	pcodec cod = NULL;
-	cod = createCodec(argv[1]);
+    pcodec cod = NULL;
+    cod = createCodec(argv[1]);
 
-	FILE *src = NULL, *dst = NULL;
-	src = fopen(argv[2], "r");
-	if (src == NULL)
-	{
-		freecodec(cod);
-		cod = NULL;
+    FILE *src = NULL, *dst = NULL;
+    src = fopen(argv[2], "r");
+    if (src == NULL)
+    {
+        freecodec(cod);
+        cod = NULL;
 
-		dlclose(handle);
-		handle = NULL;
+        dlclose(handle);
+        handle = NULL;
 
-		perror("fopen(2) failed");
-		exit(errno);
-	}
+        perror("fopen(2) failed");
+        exit(errno);
+    }
 
-	dst = fopen(argv[3], "w");
-	if (dst == NULL)
-	{
-		fclose(src);
-		src = NULL;
+    dst = fopen(argv[3], "w");
+    if (dst == NULL)
+    {
+        fclose(src);
+        src = NULL;
 
-		freecodec(cod);
-		cod = NULL;
+        freecodec(cod);
+        cod = NULL;
 
-		dlclose(handle);
-		handle = NULL;
+        dlclose(handle);
+        handle = NULL;
 
-		perror("fopen(2) failed");
-		exit(errno);
-	}
+        perror("fopen(2) failed");
+        exit(errno);
+    }
 
-	char buffer_src[BUFSIZ], buffer_dst[BUFSIZ];
-	memset(buffer_src, 0, BUFSIZ);
-	memset(buffer_dst, 0, BUFSIZ);
+    int buffer_src;
+    char buffer_dst;
+    memset(&buffer_src, 0, sizeof(int));
+    memset(&buffer_dst, 0, sizeof(char));
 
-	size_t bytes_read = 0;
-	while ((bytes_read = fread(buffer_src, sizeof(char), BUFSIZ, src)) > 0)
-	{
-		cod->decode(buffer_src, buffer_dst, strlen(buffer_src), cod);
-		fwrite(buffer_dst, sizeof(char), bytes_read, dst);
+    while ((buffer_src = fgetc(src)) != EOF)
+    {
+        if (buffer_src == '\n' || buffer_src == ' ' || buffer_src == '\t')
+        {
+            buffer_dst = buffer_src;
+        }
+        else
+        {
+            cod->decode((char *)&buffer_src, &buffer_dst, 1, cod);
+        }
 
-		bytes_read = 0;
-		memset(buffer_src, 0, BUFSIZ);
-		memset(buffer_dst, 0, BUFSIZ);
-	}
+        fwrite(&buffer_dst, sizeof(char), 1, dst);
 
-	fclose(src);
-	src = NULL;
+        memset(&buffer_src, 0, sizeof(int));
+        memset(&buffer_dst, 0, sizeof(char));
+    }
 
-	fclose(dst);
-	dst = NULL;
+    fclose(src);
+    fclose(dst);
 
-	freecodec(cod);
-	cod = NULL;
+    freecodec(cod);
+    cod = NULL;
 
-	dlclose(handle);
-	handle = NULL;
+    dlclose(handle);
+    handle = NULL;
 
-	return 0;
+    return 0;
 }

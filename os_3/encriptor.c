@@ -137,13 +137,13 @@ void *createCodec(char key[KEY_LEN])
 	}
 	for (i = 0; i < LETTERS_NUM; i++)
 	{
-		cod->cipher_pairs[i + LETTERS_NUM][0] = (char)(i + 65);
-		cod->cipher_pairs[i + LETTERS_NUM][1] = key[i];
+		cod->cipher_pairs[i + LETTERS_NUM][0] = (char)(i+65);
+		cod->cipher_pairs[i + LETTERS_NUM][1] = key[LETTERS_NUM+i];
 	}
 	for (i = 0; i < NUMBERS_NUM; i++)
 	{
-		cod->cipher_pairs[i + (2 * LETTERS_NUM)][0] = (i != (NUMBERS_NUM - 1)) ? (char)(i + 1) : (char)(0);
-		cod->cipher_pairs[i + (2 * LETTERS_NUM)][1] = key[i];
+		cod->cipher_pairs[i + (2 * LETTERS_NUM)][0] = (char)(i+48);
+		cod->cipher_pairs[i + (2 * LETTERS_NUM)][1] = key[2*LETTERS_NUM+i];
 	}
 
 	cod->encode = encode;
