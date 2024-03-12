@@ -1,14 +1,23 @@
-SUBDIRS = os_1 os_2 os_3 os_4
+CC = gcc
+FLAGS = -Wall -g
+TARGETS = libencriptor.so encode decode
 
-.PHONY: all $(SUBDIRS) clean
+.PHONY: all clean
 
-all: $(SUBDIRS)
+all: $(TARGETS)
 
-$(SUBDIRS):
-	$(MAKE) -C $@
+libencriptor.so: encriptor.c encriptor.h
+	$(CC) $(FLAGS) -fPIC -c $^
+	$(CC) -shared -o $@ encriptor.o
+	
+encode: encode.c
+	$(CC) $(FLAGS) -c $^
+	$(CC) -o $@ encode.o
 
+decode: decode.c
+	$(CC) $(FLAGS) -c $^
+	$(CC) -o $@ decode.o
+
+	
 clean:
-	for dir in $(SUBDIRS); do \
-		$(MAKE) -C $$dir clean; \
-	done
-
+	rm -rf *.o *.h.*gch $(TARGETS)
